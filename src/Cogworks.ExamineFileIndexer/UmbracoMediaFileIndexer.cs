@@ -19,7 +19,9 @@ namespace Cogworks.ExamineFileIndexer
     /// </summary>
     public class UmbracoMediaFileIndexer : BaseUmbracoIndexer
     {
-        
+
+        public Dictionary<string, string> ExtractedMetaFromTika => _extractedMetaFromTika;
+
         private Dictionary<string, string> _extractedMetaFromTika = new Dictionary<string, string>();
 
         private readonly string _loggerEntryName = typeof(UmbracoMediaFileIndexer).Name;

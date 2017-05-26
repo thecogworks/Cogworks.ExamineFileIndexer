@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Cogworks.ExamineFileIndexer;
 using NUnit.Framework;
 
@@ -17,6 +18,20 @@ namespace Cogworks.ExamineFileIndexerTests
             string extractedText = indexer.Extract(wordFileToTest);
 
             Assert.IsTrue(extractedText.Contains("Agenda"));
+        }
+
+        [Test]
+        public void Given_Valid_File_ExpectMeta_After_Extraction()
+        {
+            var indexer = new TextUmbracoFileIndexer { SupportedExtensions = new[] { ".pdf" } };
+
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
+
+           indexer.Extract(pdfFileToTest);
+
+            var metaData = indexer.ExtractedMetaFromTika;
+
+           Assert.AreEqual(metaData["dc:creator"], "Dragana");
         }
 
         [Test]
