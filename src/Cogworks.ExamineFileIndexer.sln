@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E5E831E6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cogworks.ExamineFileIndexer", "Cogworks.ExamineFileIndexer\Cogworks.ExamineFileIndexer.csproj", "{027AC239-85AA-4E82-9309-3AF66A91FF82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{821CD300-7F2E-4F40-9743-42AC2B5FB118}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cogworks.ExamineFileIndexerTests", "Cogworks.ExamineFileIndexerTests\Cogworks.ExamineFileIndexerTests.csproj", "{7201B95D-A12C-4336-B399-A8CE6DC8E78D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +21,19 @@ Global
 		{027AC239-85AA-4E82-9309-3AF66A91FF82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{027AC239-85AA-4E82-9309-3AF66A91FF82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{027AC239-85AA-4E82-9309-3AF66A91FF82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821CD300-7F2E-4F40-9743-42AC2B5FB118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821CD300-7F2E-4F40-9743-42AC2B5FB118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821CD300-7F2E-4F40-9743-42AC2B5FB118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821CD300-7F2E-4F40-9743-42AC2B5FB118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7201B95D-A12C-4336-B399-A8CE6DC8E78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7201B95D-A12C-4336-B399-A8CE6DC8E78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7201B95D-A12C-4336-B399-A8CE6DC8E78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7201B95D-A12C-4336-B399-A8CE6DC8E78D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7201B95D-A12C-4336-B399-A8CE6DC8E78D} = {E5E831E6-F2D6-484C-9BF5-AC0597C613AF}
 	EndGlobalSection
 EndGlobal

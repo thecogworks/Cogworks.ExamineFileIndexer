@@ -245,7 +245,7 @@ namespace Cogworks.ExamineFileIndexer
         /// <summary>
         /// Parses a media file and extracts the text from it via tika.
         /// </summary>
-        internal class MediaParser
+        public class MediaParser
         {
             /// <summary>
             /// Return only the valid string contents of the file
