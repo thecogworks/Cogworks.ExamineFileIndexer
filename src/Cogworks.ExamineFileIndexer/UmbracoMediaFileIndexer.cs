@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Cogworks.ExamineFileIndexer.Helper;
 using Examine;
 using Lucene.Net.Analysis;
-using TikaOnDotNet.TextExtraction;
 using UmbracoExamine;
 using UmbracoExamine.DataServices;
 
@@ -30,7 +28,6 @@ namespace Cogworks.ExamineFileIndexer
         {
             SupportedExtensions = new[] { ".pdf" };
             UmbracoFileProperty = "umbracoFile";
-            YouTubeUrlProperty = String.Empty;
         }
 
         /// <summary>
@@ -47,7 +44,6 @@ namespace Cogworks.ExamineFileIndexer
         {
             SupportedExtensions = new[] { ".pdf" };
             UmbracoFileProperty = "umbracoFile";
-            YouTubeUrlProperty = String.Empty;
         }
 
 
@@ -64,11 +60,7 @@ namespace Cogworks.ExamineFileIndexer
         /// <value>The umbraco file property.</value>
         public string UmbracoFileProperty { get; set; }
 
-        /// <summary>
-        /// Gets or sets the YouTube umbraco property alias (defaults to String.Empty)
-        /// </summary>
-        /// <value>The YouTube url property.</value>
-        public string YouTubeUrlProperty { get; set; }
+       
 
         /// <summary>
         /// Gets the name of the Lucene.Net field which the content is inserted into
@@ -103,9 +95,6 @@ namespace Cogworks.ExamineFileIndexer
             if (!string.IsNullOrEmpty(config["umbracoFileProperty"]))
                 UmbracoFileProperty = config["umbracoFileProperty"];
 
-            //checks if a custom field alias for YouTube urls is specified
-            if (!string.IsNullOrEmpty(config["youTubeUrlProperty"]))
-                YouTubeUrlProperty = config["youTubeUrlProperty"];
         }
 
         /// <summary>
@@ -180,7 +169,7 @@ namespace Cogworks.ExamineFileIndexer
 
         protected override bool ValidateDocument(XElement node)
         {
-            if (!IsAllowedExtension(node) && !IsYouTube(node))
+            if (!IsAllowedExtension(node))
             {
                 return false;
             }
@@ -205,26 +194,6 @@ namespace Cogworks.ExamineFileIndexer
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// check to see if the YouTube property has been set, and if so does it exist for indexing?
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        private bool IsYouTube(XElement node)
-        {
-            if (String.IsNullOrEmpty(YouTubeUrlProperty))
-            {
-                return false;
-            }
-
-            var youTubeProperty = node.Element(YouTubeUrlProperty);
-            if (youTubeProperty == null)
-                return false;
-
-            return true;
-        }
-        
+        }        
     }
 }
