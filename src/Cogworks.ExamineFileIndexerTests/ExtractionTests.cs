@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Cogworks.ExamineFileIndexer;
+using Cogworks.ExamineFileIndexerTests.Helper;
 using NUnit.Framework;
 
 namespace Cogworks.ExamineFileIndexerTests
@@ -12,7 +13,7 @@ namespace Cogworks.ExamineFileIndexerTests
         [Test]
         public void Given_WordFile_Expect_Extracted_Content()
         {
-            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Cog Quiz 21.10.16.docx");
+            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.DocToTest);
 
             var umbracoFileIndexer=new MediaParser();
 
@@ -28,7 +29,7 @@ namespace Cogworks.ExamineFileIndexerTests
         [Test]
         public void Given_PdfFile_Expect_Extracted_Content()
         {
-            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
 
             var umbracoFileIndexer = new MediaParser();
 
@@ -43,7 +44,7 @@ namespace Cogworks.ExamineFileIndexerTests
         [TestCase]
         public void Given_Large_No_Of_Docs_Expect_No_Out_Of_Memory_Exceptions_Thrown()
         {
-            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
 
             int noOfDocs = 1000;
 

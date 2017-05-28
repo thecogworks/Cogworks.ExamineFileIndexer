@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Cogworks.ExamineFileIndexer;
+using Cogworks.ExamineFileIndexerTests.Helper;
 using NUnit.Framework;
 
 namespace Cogworks.ExamineFileIndexerTests
@@ -12,7 +13,7 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             var indexer = new TextUmbracoFileIndexer { SupportedExtensions = new[] {".docx"}};
 
-            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Cog Quiz 21.10.16.docx");
+            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.DocToTest);
 
             string extractedText = indexer.Extract(wordFileToTest);
 
@@ -24,7 +25,7 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             var indexer = new TextUmbracoFileIndexer { SupportedExtensions = new[] { ".pdf" } };
 
-            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory,TestHelper.PdfToTest);
 
            indexer.Extract(pdfFileToTest);
 
@@ -38,7 +39,7 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             var indexer = new TextUmbracoFileIndexer { SupportedExtensions = new[] { ".docx" } };
 
-            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
+            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
 
             var ex = Assert.Throws<System.NotSupportedException>(()=> indexer.Extract(wordFileToTest));
 
