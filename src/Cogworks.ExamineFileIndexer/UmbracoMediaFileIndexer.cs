@@ -175,22 +175,6 @@ namespace Cogworks.ExamineFileIndexer
                 }
             }
 
-            // check if the node has a YouTube url property
-            if (!String.IsNullOrEmpty(YouTubeUrlProperty))
-            {
-                var youTubeProperty = node.Element(YouTubeUrlProperty);
-                if (youTubeProperty != null)
-                {
-                    // get the data from YouTube
-                    MetaData.IMetaDataProvider metaDataProvider = new MetaData.YouTubeProvider();
-                    var meta = metaDataProvider.GetData(node, youTubeProperty.Value, DataService.LogService);
-                    if (meta.Keys.Count > 0)
-                    {
-                        fields.AddRange(meta);
-                    }
-                }
-            }
-
             return fields;
         }
 

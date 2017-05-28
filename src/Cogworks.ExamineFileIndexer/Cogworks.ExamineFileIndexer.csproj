@@ -32,8 +32,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Helper\DictionaryHelper.cs" />
-    <Compile Include="MetaData\IMetaDataProvider.cs" />
-    <Compile Include="MetaData\YouTubeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoMediaFileIndexer.cs" />
   </ItemGroup>
