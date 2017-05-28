@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Cogworks.ExamineFileIndexer;
 using Cogworks.ExamineFileIndexerTests.Helper;
+using Examine.LuceneEngine;
 using NUnit.Framework;
 
 namespace Cogworks.ExamineFileIndexerTests
@@ -45,6 +49,8 @@ namespace Cogworks.ExamineFileIndexerTests
 
             Assert.IsTrue(ex.Message.Contains("The file with the extension specified is not supported"));
         }
+
+       
 
         /// <summary>
         /// the method we want to test is protected so we fake an instance and test with that instead
