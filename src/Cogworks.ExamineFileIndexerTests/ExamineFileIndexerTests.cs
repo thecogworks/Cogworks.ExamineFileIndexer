@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Xml.Linq;
-using System.Xml.XPath;
+﻿using System.IO;
 using Cogworks.ExamineFileIndexer;
 using Cogworks.ExamineFileIndexerTests.Helper;
-using Examine.LuceneEngine;
 using NUnit.Framework;
 
 namespace Cogworks.ExamineFileIndexerTests

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Examine xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+
+  <ExamineIndexProviders>
+    <providers>
+      <add name="MediaIndexer"
+           type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer"
+              extensions=".pdf,.docx"
+           umbracoFileProperty="umbracoFile"
+           xdt:Locator="Match(name)"
+           xdt:Transform="InsertIfMissing"/>
+    </providers>
+  </ExamineIndexProviders>
+
+  <ExamineSearchProviders>
+    <providers>
+      <add name="MediaSearcher"
+         type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine"
+         xdt:Locator="Match(name)"
+         xdt:Transform="InsertIfMissing"/>
+    </providers>
+  </ExamineSearchProviders>
+
+</Examine>

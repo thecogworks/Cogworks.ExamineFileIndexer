@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ExamineLuceneIndexSets xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  
+  <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet"
+            xdt:Locator="Match(SetName)"
+            xdt:Transform="InsertIfMissing"/>
+</ExamineLuceneIndexSets>
