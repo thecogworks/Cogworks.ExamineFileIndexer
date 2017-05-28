@@ -15,7 +15,7 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\IntegratingMVCapplicationsintoUmbraco.docx");
 
-            var umbracoFileIndexer=new UmbracoMediaFileIndexer.MediaParser();
+            var umbracoFileIndexer=new MediaParser();
 
             var metaData=new Dictionary<string,string>();
 
@@ -31,7 +31,7 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
 
-            var umbracoFileIndexer = new UmbracoMediaFileIndexer.MediaParser();
+            var umbracoFileIndexer = new MediaParser();
 
             var metaData = new Dictionary<string, string>();
 
@@ -47,7 +47,7 @@ namespace Cogworks.ExamineFileIndexerTests
             string pathToLotsOfFiles = Path.Combine(TestContext.CurrentContext.TestDirectory, @"LotsOfFiles");
 
             var files = Directory.GetFiles(pathToLotsOfFiles).ToList();
-            var umbracoFileIndexer = new UmbracoMediaFileIndexer.MediaParser();
+            var umbracoFileIndexer = new MediaParser();
             var metaData = new Dictionary<string, string>();
 
             foreach (var file in files)
