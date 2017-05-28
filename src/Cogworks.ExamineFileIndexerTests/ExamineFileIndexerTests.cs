@@ -12,11 +12,11 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             var indexer = new TextUmbracoFileIndexer { SupportedExtensions = new[] {".docx"}};
 
-            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\IntegratingMVCapplicationsintoUmbraco.docx");
+            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Cog Quiz 21.10.16.docx");
 
             string extractedText = indexer.Extract(wordFileToTest);
 
-            Assert.IsTrue(extractedText.Contains("Agenda"));
+            Assert.IsTrue(extractedText.Contains("Current"));
         }
 
         [Test]
