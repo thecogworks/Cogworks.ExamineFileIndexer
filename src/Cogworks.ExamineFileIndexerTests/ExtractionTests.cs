@@ -15,11 +15,11 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.DocToTest);
 
-            var umbracoFileIndexer=new MediaParser();
+            var mediaParser=new MediaParser();
 
             var metaData=new Dictionary<string,string>();
 
-            string extractedText = umbracoFileIndexer.ParseMediaText(wordFileToTest, WriteToConsole, out metaData);
+            string extractedText = mediaParser.ParseMediaText(wordFileToTest, WriteToConsole, out metaData);
 
          
             Assert.IsTrue(extractedText.Contains("Current"));
@@ -31,13 +31,41 @@ namespace Cogworks.ExamineFileIndexerTests
         {
             string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
 
-            var umbracoFileIndexer = new MediaParser();
+            var mediaParser = new MediaParser();
 
             var metaData = new Dictionary<string, string>();
 
-            string extractedText = umbracoFileIndexer.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
+            string extractedText = mediaParser.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
 
             Assert.IsTrue(extractedText.Contains("PowerShell"));
+        }
+
+        [Test]
+        public void Given_Pdf_Stream_Expect_Extracted_Content()
+        {
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
+
+            byte[] data = FileToByteArray(pdfFileToTest);
+
+            var metaData = new Dictionary<string, string>();
+
+            var mediaParser = new MediaParser();
+
+            var extractedText = mediaParser.ParseMediaText(data, WriteToConsole, out metaData);
+
+            Assert.IsTrue(extractedText.Contains("PowerShell"));
+        }
+
+        private byte[] FileToByteArray(string fileName)
+        {
+            byte[] buff = null;
+            FileStream fs = new FileStream(fileName,
+                                           FileMode.Open,
+                                           FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            long numBytes = new FileInfo(fileName).Length;
+            buff = br.ReadBytes((int)numBytes);
+            return buff;
         }
 
         [Test]
@@ -48,13 +76,13 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int noOfDocs = 1000;
 
-            var umbracoFileIndexer = new MediaParser();
+            var mediaParser = new MediaParser();
 
             var metaData = new Dictionary<string, string>();
 
             for (int i = 0; i < noOfDocs; i++)
             {
-                string extractedText = umbracoFileIndexer.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
+                string extractedText = mediaParser.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
 
                 Assert.IsTrue(extractedText.Contains("PowerShell"));
             }
