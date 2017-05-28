@@ -168,9 +168,6 @@ namespace Cogworks.ExamineFileIndexer
                 else
                 {
                     // perhaps it's available via the VirtualPathProvider ?
-                    // skip: local ExtractTextFromFile call which checks file type
-                    // skip: MediaParser which is a wrapper round TextExtractor
-
                     var stream = VirtualPathProvider.OpenFile((string)filePath);
 
                     if (stream.CanRead)
@@ -195,7 +192,7 @@ namespace Cogworks.ExamineFileIndexer
 
         private ExtractionResult ExtractContentFromStream(Stream stream)
         {
-            byte[] data = null;
+            byte[] data;
             var metaData = new Dictionary<string, string>();
 
             var extractionResult = new ExtractionResult();
@@ -208,7 +205,7 @@ namespace Cogworks.ExamineFileIndexer
                 data = ms.ToArray();
             }
 
-            if (data != null)
+            if (data != null && data.Length>0)
             {
                 var mediaParser = new MediaParser();
                 extractionResult.ExtractedText = mediaParser.ParseMediaText(data,onError, out metaData);
@@ -216,7 +213,6 @@ namespace Cogworks.ExamineFileIndexer
             }
 
             return extractionResult;
-
         }
 
         private static bool FileExists(XElement filePath)
