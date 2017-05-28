@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Cogworks.ExamineFileIndexer;
 using Cogworks.ExamineFileIndexerTests.Helper;
 using NUnit.Framework;
+using Umbraco.Core;
 
 namespace Cogworks.ExamineFileIndexerTests
 {
@@ -76,16 +78,26 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int noOfDocs = 1000;
 
+            var totalTimer = new Stopwatch();
+
             var mediaParser = new MediaParser();
 
             var metaData = new Dictionary<string, string>();
 
+            totalTimer.Start();
+
             for (int i = 0; i < noOfDocs; i++)
             {
-                string extractedText = mediaParser.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
-
-                Assert.IsTrue(extractedText.Contains("PowerShell"));
+                Assert.That(() => mediaParser.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData),
+                    Throws.Nothing);
             }
+
+            totalTimer.Stop();
+
+            Console.WriteLine(totalTimer.ElapsedTicks);
+
+            totalTimer.DisposeIfDisposable();
+
         }
 
         private void WriteToConsole(Exception ex)
