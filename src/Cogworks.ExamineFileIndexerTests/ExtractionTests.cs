@@ -70,13 +70,17 @@ namespace Cogworks.ExamineFileIndexerTests
             return buff;
         }
 
+
+        /// <summary>
+        /// this test mimics extracting large no of docs we should nto get out of memory exceptions
+        /// this test is long running takes approx 6 mins
+        /// </summary>
+        /// <param name="noOfDocs">no of docs to mimic</param>
         [Test]
-        [TestCase]
-        public void Given_Large_No_Of_Docs_Expect_No_Out_Of_Memory_Exceptions_Thrown()
+        [TestCase(1000)]
+        public void Given_Large_No_Of_Docs_Expect_No_Out_Of_Memory_Exceptions_Thrown(int noOfDocs)
         {
             string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);
-
-            int noOfDocs = 1000;
 
             var totalTimer = new Stopwatch();
 
