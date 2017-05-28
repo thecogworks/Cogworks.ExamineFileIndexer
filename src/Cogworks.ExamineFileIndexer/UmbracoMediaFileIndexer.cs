@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Web.Hosting;
 using System.Xml.Linq;
 using Cogworks.ExamineFileIndexer.Helper;
 using Examine;
@@ -134,12 +135,17 @@ namespace Cogworks.ExamineFileIndexer
             var filePath = node.Elements().FirstOrDefault(x =>
             {
                 if (x.Attribute("alias") != null)
+                {
                     return (string)x.Attribute("alias") == this.UmbracoFileProperty;
+                }
                 else
+                {
                     return x.Name == this.UmbracoFileProperty;
+                }
             });
-            //make sure the file exists
-            if (filePath != default(XElement) && !string.IsNullOrEmpty((string)filePath))
+
+            
+            if (FileExists(filePath))
             {
                 //get the file path from the data service
                 var fullPath = this.DataService.MapPath((string)filePath);
@@ -149,6 +155,7 @@ namespace Cogworks.ExamineFileIndexer
                     try
                     {
                         fields.Add(TextContentFieldName, ExtractTextFromFile(fi));
+
                         //add any addtional meta data extracted via tika from MediaParser.ParseMediaText
                         fields.AddRange(_extractedMetaFromTika);
                     }
@@ -160,11 +167,61 @@ namespace Cogworks.ExamineFileIndexer
                 }
                 else
                 {
-                    DataService.LogService.AddInfoLog((int)node.Attribute("id"), _loggerEntryName + ": No file found at path " + filePath);
+                    // perhaps it's available via the VirtualPathProvider ?
+                    // skip: local ExtractTextFromFile call which checks file type
+                    // skip: MediaParser which is a wrapper round TextExtractor
+
+                    var stream = VirtualPathProvider.OpenFile((string)filePath);
+
+                    if (stream.CanRead)
+                    {
+                        var extractionResult = ExtractContentFromStream(stream);
+
+                        if (!string.IsNullOrWhiteSpace(extractionResult.ExtractedText))
+                        {
+                            fields.Add(TextContentFieldName, extractionResult.ExtractedText);
+                            fields.AddRange(extractionResult.MetaData);
+                        }
+                    }
+                    else
+                    {
+                        DataService.LogService.AddInfoLog((int)node.Attribute("id"), _loggerEntryName + ": No file found at path " + filePath);
+                    }
                 }
             }
 
             return fields;
+        }
+
+        private ExtractionResult ExtractContentFromStream(Stream stream)
+        {
+            byte[] data = null;
+            var metaData = new Dictionary<string, string>();
+
+            var extractionResult = new ExtractionResult();
+
+            Action<Exception> onError = (e) => OnIndexingError(new IndexingErrorEventArgs("Could not read media item", -1, e));
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                data = ms.ToArray();
+            }
+
+            if (data != null)
+            {
+                var mediaParser = new MediaParser();
+                extractionResult.ExtractedText = mediaParser.ParseMediaText(data,onError, out metaData);
+                extractionResult.MetaData = metaData;
+            }
+
+            return extractionResult;
+
+        }
+
+        private static bool FileExists(XElement filePath)
+        {
+            return filePath != default(XElement) && !string.IsNullOrEmpty((string)filePath);
         }
 
         protected override bool ValidateDocument(XElement node)
@@ -194,6 +251,12 @@ namespace Cogworks.ExamineFileIndexer
                 }
             }
             return false;
-        }        
+        }
+
+        internal struct ExtractionResult
+        {
+            public string ExtractedText { get; set; }
+            public Dictionary<string,string> MetaData { get; set; }
+        }
     }
 }

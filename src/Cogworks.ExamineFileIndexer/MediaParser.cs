@@ -35,5 +35,29 @@ namespace Cogworks.ExamineFileIndexer
             MetaData = metaData;
             return sb.ToString();
         }
+
+        public string ParseMediaText(byte[] data,Action<Exception> onError, out Dictionary<string, string> MetaData)
+        {
+            TextExtractor textExtractor = new TextExtractor();
+            var metaData = new Dictionary<string, string>();
+            var sb = new StringBuilder();
+            try
+            {
+                TextExtractionResult textExtractionResult = textExtractor.Extract(data);
+
+                if (!string.IsNullOrWhiteSpace(textExtractionResult.Text))
+                {
+                    metaData = (Dictionary<string, string>)textExtractionResult.Metadata;
+                    
+                    sb.Append(textExtractionResult.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                onError(ex);
+            }
+            MetaData = metaData;
+            return sb.ToString();
+        }
     }
 }
