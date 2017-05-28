@@ -277,10 +277,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="TestFiles\Exploring_PowerShell_Automation.pdf">
+    <None Include="TestFiles\Cog Quiz 21.10.16.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\IntegratingMVCapplicationsintoUmbraco.docx">
+    <None Include="TestFiles\Exploring_PowerShell_Automation.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Cogworks.ExamineFileIndexer;
 using NUnit.Framework;
 
@@ -13,7 +12,7 @@ namespace Cogworks.ExamineFileIndexerTests
         [Test]
         public void Given_WordFile_Expect_Extracted_Content()
         {
-            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\IntegratingMVCapplicationsintoUmbraco.docx");
+            string wordFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Cog Quiz 21.10.16.docx");
 
             var umbracoFileIndexer=new MediaParser();
 
@@ -22,7 +21,7 @@ namespace Cogworks.ExamineFileIndexerTests
             string extractedText = umbracoFileIndexer.ParseMediaText(wordFileToTest, WriteToConsole, out metaData);
 
          
-            Assert.IsTrue(extractedText.Contains("Agenda"));
+            Assert.IsTrue(extractedText.Contains("Current"));
 
         }
 
@@ -44,18 +43,20 @@ namespace Cogworks.ExamineFileIndexerTests
         [TestCase]
         public void Given_Large_No_Of_Docs_Expect_No_Out_Of_Memory_Exceptions_Thrown()
         {
-            string pathToLotsOfFiles = Path.Combine(TestContext.CurrentContext.TestDirectory, @"LotsOfFiles");
+            string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestFiles\Exploring_PowerShell_Automation.pdf");
 
-            var files = Directory.GetFiles(pathToLotsOfFiles).ToList();
+            int noOfDocs = 1000;
+
             var umbracoFileIndexer = new MediaParser();
+
             var metaData = new Dictionary<string, string>();
 
-            foreach (var file in files)
+            for (int i = 0; i < noOfDocs; i++)
             {
-                umbracoFileIndexer.ParseMediaText(file,WriteToConsole, out metaData);
-            }
+                string extractedText = umbracoFileIndexer.ParseMediaText(pdfFileToTest, WriteToConsole, out metaData);
 
-            Assert.IsTrue(files.Any());
+                Assert.IsTrue(extractedText.Contains("PowerShell"));
+            }
         }
 
         private void WriteToConsole(Exception ex)
