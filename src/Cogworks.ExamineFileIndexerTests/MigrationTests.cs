@@ -35,7 +35,7 @@ namespace Cogworks.ExamineFileIndexerTests
         }
 
         [Test]
-        public void Given_Examine_SettingsFile_Add_MediaIndexer_Searcher_To_Config()
+        public void Given_Examine_SettingsFile_Add_MediaIndexer_To_Config()
         {
             string pathToConfig = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.ExamineSettingsConfigFile);
 
@@ -50,6 +50,26 @@ namespace Cogworks.ExamineFileIndexerTests
 
 
             int nodeCountAfterUpdate = updateDocument.XPathSelectElements(Constants.XpathToTestIndexProviderSectionExists).Count();
+
+            Assert.AreNotEqual(initialNodeCode, nodeCountAfterUpdate);
+        }
+
+        [Test]
+        public void Given_Examine_SettingsFile_Add_Searcher_To_Config()
+        {
+            string pathToConfig = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.ExamineSettingsConfigFile);
+
+            XDocument xmlFile = XDocument.Load(pathToConfig);
+
+            int initialNodeCode = xmlFile.XPathSelectElements(Constants.XpathToTestSearchProviderSectionExists).Count();
+
+            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);
+
+            XDocument updateDocument = updater.UpdateXmlFile(Constants.XpathToTestSearchProviderSectionExists,
+                Constants.ExamineSearchProviderFragmentXml, Constants.XpathToInsertSearchProviderSectionAfter);
+
+
+            int nodeCountAfterUpdate = updateDocument.XPathSelectElements(Constants.XpathToTestSearchProviderSectionExists).Count();
 
             Assert.AreNotEqual(initialNodeCode, nodeCountAfterUpdate);
         }

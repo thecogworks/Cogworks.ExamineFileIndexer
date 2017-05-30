@@ -18,5 +18,13 @@
 
         public const string ExamineSettingsProviderFragmentXml =
             "<add name=\"MediaIndexer\" type=\"Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer\" extensions=\".pdf,.docx\" umbracoFileProperty=\"umbracoFile\"/>";
+
+
+        public const string XpathToTestSearchProviderSectionExists = "/Examine/ExamineSearchProviders/providers/add[@name='MediaSearcher']";
+
+        public const string XpathToInsertSearchProviderSectionAfter = "/Examine/ExamineSearchProviders/providers/add";
+
+        public const string ExamineSearchProviderFragmentXml =
+            " <add name=\"MediaSearcher\" type=\"UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine\" indexSet=\"MediaIndexSet\" analyzer=\"Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net\"/>";
     }
 }
