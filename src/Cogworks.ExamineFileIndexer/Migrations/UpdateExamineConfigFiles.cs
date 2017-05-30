@@ -10,6 +10,8 @@ namespace Cogworks.ExamineFileIndexer.Migrations
     [Migration("1.0.0", 1, "Cogworks.ExamineFileIndexer")]
     public class UpdateExamineConfigFiles : MigrationBase
     {
+        private string _confDir = SystemDirectories.Config.Replace("config~\\",string.Empty);
+
         public UpdateExamineConfigFiles(ISqlSyntaxProvider sqlSyntax, ILogger logger) : base(sqlSyntax, logger)
         {
 
@@ -28,12 +30,13 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             catch (Exception ex)
             {
                 Logger.Error<Exception>("Error updating examine config files", ex);
+               
             }
         }
 
         private void UpdateExamineIndexConfig()
         {
-            var pathToExamineIndexConfig = SystemDirectories.Config + "/ExamineIndex.config";
+            var pathToExamineIndexConfig = _confDir + "ExamineIndex.config";
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -42,11 +45,13 @@ namespace Cogworks.ExamineFileIndexer.Migrations
                                                             Constants.XpathToInsertIndexSectionAfter);
 
             updatedConfig.Save(pathToExamineIndexConfig);
+
+            Logger.Debug<UpdateExamineConfigFiles>("Updated examine index config");
         }
 
         private void UpdateExamineSettingsIndexProviderConfig()
         {
-            var pathToExamineIndexConfig = SystemDirectories.Config + "/ExamineSettings.config";
+            var pathToExamineIndexConfig = _confDir + "/ExamineSettings.config";
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -56,11 +61,13 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
             updatedConfig.Save(pathToExamineIndexConfig);
 
+            Logger.Debug<UpdateExamineConfigFiles>("Updated examine settings config added index provider");
+
         }
 
         private void UpdateExamineSettingsSearchProviderConfig()
         {
-            var pathToExamineIndexConfig = SystemDirectories.Config + "/ExamineSettings.config";
+            var pathToExamineIndexConfig = _confDir + "/ExamineSettings.config";
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -69,6 +76,8 @@ namespace Cogworks.ExamineFileIndexer.Migrations
                                                             Constants.XpathToInsertSearchProviderSectionAfter);
 
             updatedConfig.Save(pathToExamineIndexConfig);
+
+            Logger.Debug<UpdateExamineConfigFiles>("Updated examine settings config added search provider");
 
         }
 
@@ -86,7 +95,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         public override void Down()
         {
-            
+            //todo add removal code
         }
     }
 }
