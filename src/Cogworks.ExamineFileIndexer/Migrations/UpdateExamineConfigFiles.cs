@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Web;
 using System.Xml.Linq;
 using Umbraco.Core.IO;
 using Umbraco.Core.Logging;
@@ -10,7 +12,8 @@ namespace Cogworks.ExamineFileIndexer.Migrations
     [Migration("1.0.0", 1, "Cogworks.ExamineFileIndexer")]
     public class UpdateExamineConfigFiles : MigrationBase
     {
-        private string _confDir = SystemDirectories.Config.Replace("config~\\",string.Empty);
+        //you will get path like C:\code\ExamineFileIndexer\src\Web\config~\config
+        private string _confDir = HttpContext.Current.Server.MapPath("/config");
 
         public UpdateExamineConfigFiles(ISqlSyntaxProvider sqlSyntax, ILogger logger) : base(sqlSyntax, logger)
         {
@@ -21,6 +24,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         {
             try
             {
+                Logger.Debug<UpdateExamineConfigFiles>("looking at dir " + _confDir);
                 UpdateExamineIndexConfig();
 
                 UpdateExamineSettingsIndexProviderConfig();
@@ -36,7 +40,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         private void UpdateExamineIndexConfig()
         {
-            var pathToExamineIndexConfig = _confDir + "ExamineIndex.config";
+            var pathToExamineIndexConfig = Path.Combine(_confDir , "ExamineIndex.config");
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -51,7 +55,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         private void UpdateExamineSettingsIndexProviderConfig()
         {
-            var pathToExamineIndexConfig = _confDir + "/ExamineSettings.config";
+            var pathToExamineIndexConfig = Path.Combine(_confDir, "ExamineSettings.config");
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -67,7 +71,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         private void UpdateExamineSettingsSearchProviderConfig()
         {
-            var pathToExamineIndexConfig = _confDir + "/ExamineSettings.config";
+            var pathToExamineIndexConfig = Path.Combine(_confDir,"ExamineSettings.config");
 
             var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
 
@@ -84,9 +88,8 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         private ConfigFileUpdater GetConfigXmlToUpdate(string fileToUpdate)
         {
-            var pathToExamineIndexConfig = IOHelper.MapPath(SystemDirectories.Config + fileToUpdate);
-
-            var indexConfig = XDocument.Load(pathToExamineIndexConfig);
+           
+            var indexConfig = XDocument.Load(fileToUpdate);
 
             var configUpdater = new ConfigFileUpdater(indexConfig);
 
