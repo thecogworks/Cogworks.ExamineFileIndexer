@@ -37,15 +37,20 @@
     <Compile Include="UmbracoMediaFileIndexer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="build\nuget-transforms\ExamineIndex.config.install.xdt" />
-    <None Include="build\nuget-transforms\ExamineIndex.config.uninstall.xdt" />
-    <None Include="build\nuget-transforms\ExamineSettings.config.install.xdt" />
-    <None Include="build\nuget-transforms\ExamineSettings.config.uninstall.xdt" />
-    <None Include="Cogworks.ExamineFileIndexer.nuspec" />
+    <Content Include="build\nuget-transforms\ExamineIndex.config.install.xdt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="build\nuget-transforms\ExamineIndex.config.uninstall.xdt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="build\nuget-transforms\ExamineSettings.config.install.xdt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="build\nuget-transforms\ExamineSettings.config.uninstall.xdt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.json" />
-    <None Include="Web\config\ExamineSettings.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -373,9 +378,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <None Include="Web\config\ExamineIndex.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <PropertyGroup>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cogworks.SiteLock")]
-[assembly: AssemblyDescription("A flexible, draggable link picker for constructing site navigation menus, big or small, in Umbraco 7.")]
+[assembly: AssemblyTitle("Cogworks.ExamineFileIndexer")]
+[assembly: AssemblyDescription("An examine indexer that uses Apache TIKA")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cogworks")]
-[assembly: AssemblyProduct("Umbraco SiteLock")]
+[assembly: AssemblyProduct("Cogworks.ExamineFileIndexer")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
