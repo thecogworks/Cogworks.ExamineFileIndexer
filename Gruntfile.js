@@ -37,6 +37,15 @@ module.exports = function(grunt) {
                             pkg.name + '.xml'
                         ],
                         dest: releaseFilesDir + 'bin/'
+                    },
+					 {
+                        expand: true,
+                        cwd: projectDir + 'bin/Release/',
+                        src: [
+								'IKVM*.dll',
+								'Tika*.dll'
+                        ],
+                        dest: releaseFilesDir + 'bin/'
                     }
                 ]
             }
@@ -45,7 +54,8 @@ module.exports = function(grunt) {
             release: {
                 cwd: releaseFilesDir,
                 src: [
-                    releaseFilesDir + '**/*.*'
+                    releaseFilesDir + '**/*.*',
+					
                 ],
                 dest: releaseDir + 'zip/' + pkg.name + '.v' + version + '.zip'
             }
