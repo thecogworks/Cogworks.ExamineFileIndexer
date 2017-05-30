@@ -24,6 +24,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             try
             {
                 Logger.Debug<UpdateExamineConfigFiles>("looking at dir " + _confDir);
+
                 UpdateExamineIndexConfig();
 
                 UpdateExamineSettingsIndexProviderConfig();
