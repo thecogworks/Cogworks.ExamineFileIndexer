@@ -3,5 +3,19 @@
   
   <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet"
             xdt:Locator="Match(SetName)"
-            xdt:Transform="InsertIfMissing"/>
+            xdt:Transform="InsertIfMissing">
+    
+   <IndexAttributeFields>
+      <add Name="id" />
+      <add Name="nodeName" />
+      <add Name="updateDate" />
+      <add Name="writerName" />
+      <add Name="path" />
+      <add Name="nodeTypeAlias" />
+      <add Name="parentID" />
+    </IndexAttributeFields>
+    <IncludeNodeTypes>
+      <add Name="File" />
+    </IncludeNodeTypes>
+</IndexSet>
 </ExamineLuceneIndexSets>

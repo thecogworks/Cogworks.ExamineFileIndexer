@@ -272,10 +272,17 @@
     <Compile Include="ExamineFileIndexerTests.cs" />
     <Compile Include="ExtractionTests.cs" />
     <Compile Include="Helper\TestHelper.cs" />
+    <Compile Include="MigrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="config\ExamineIndex.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="config\ExamineSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="TestFiles\Cog Quiz 21.10.16.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -290,6 +297,7 @@
       <Name>Cogworks.ExamineFileIndexer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
