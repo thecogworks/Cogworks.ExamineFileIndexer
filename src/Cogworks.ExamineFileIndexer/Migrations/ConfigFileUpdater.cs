@@ -30,5 +30,14 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
             return _xmlFile;
         }
+
+        public XDocument Remove(string xpathToRemove)
+        {
+            var existingNode = _xmlFile.XPathSelectElements(xpathToRemove);
+
+            existingNode.Remove();
+
+            return _xmlFile;
+        }
     }
 }

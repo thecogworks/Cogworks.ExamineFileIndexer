@@ -96,6 +96,24 @@ namespace Cogworks.ExamineFileIndexerTests
 
             Assert.AreNotEqual(initialNodeCode, nodeCountAfterUpdate);
         }
+
+        [Test]
+        public void When_XPath_And_Remove_Executed_Expect_Element_To_Be_Removed()
+        {
+            string pathToConfig = Path.Combine(TestContext.CurrentContext.TestDirectory, @"config\ExamineIndexWithMediaIndex.config");
+
+            XDocument xmlFile = XDocument.Load(pathToConfig);
+
+            string xpathToRemove = Constants.XpathToTestIndexSectionExists;
+
+            ConfigFileUpdater updater = new ConfigFileUpdater(xmlFile);
+
+            XDocument updatedDocument = updater.Remove(xpathToRemove);
+
+            int nodeCountAfterUpdate = updatedDocument.XPathSelectElements(xpathToRemove).Count();
+
+            Assert.AreEqual(0,nodeCountAfterUpdate);
+        }
     }
 
     
