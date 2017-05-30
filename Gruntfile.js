@@ -19,6 +19,11 @@ module.exports = function(grunt) {
     // get the version of the package
     var version = assembly.informationalVersion ? assembly.informationalVersion : assembly.version;
 
+	var umbracoPackageFileDependancies =  [
+								'IKVM*.dll',
+								'Tika*.dll'
+                        ];
+	
     grunt.initConfig({
         pkg: pkg,
         clean: {
@@ -41,10 +46,7 @@ module.exports = function(grunt) {
 					 {
                         expand: true,
                         cwd: projectDir + 'bin/Release/',
-                        src: [
-								'IKVM*.dll',
-								'Tika*.dll'
-                        ],
+                        src:umbracoPackageFileDependancies,
                         dest: releaseFilesDir + 'bin/'
                     }
                 ]
