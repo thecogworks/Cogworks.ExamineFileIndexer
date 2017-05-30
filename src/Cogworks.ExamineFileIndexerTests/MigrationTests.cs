@@ -22,7 +22,7 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int initialNodeCode = xmlFile.XPathSelectElements(xpathToTestSectionExists).Count();
 
-            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);  
+            ConfigFileUpdater updater = new ConfigFileUpdater(xmlFile);  
 
             string xmlElementToInsert = Constants.ExamineIndexFragmentXml;
 
@@ -45,7 +45,7 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int initialNodeCode = xmlFile.XPathSelectElements(xpathToTestSectionExists).Count(); //expect it to be 1
 
-            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);
+            ConfigFileUpdater updater = new ConfigFileUpdater(xmlFile);
 
             string xmlElementToInsert = Constants.ExamineIndexFragmentXml;
 
@@ -66,7 +66,7 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int initialNodeCode = xmlFile.XPathSelectElements(Constants.XpathToTestIndexProviderSectionExists).Count();
 
-            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);
+            ConfigFileUpdater updater = new ConfigFileUpdater(xmlFile);
 
             XDocument updateDocument = updater.UpdateXmlFile(Constants.XpathToTestIndexProviderSectionExists,
                 Constants.ExamineSettingsProviderFragmentXml, Constants.XpathToInsertIndexProviderSectionAfter);
@@ -86,7 +86,7 @@ namespace Cogworks.ExamineFileIndexerTests
 
             int initialNodeCode = xmlFile.XPathSelectElements(Constants.XpathToTestSearchProviderSectionExists).Count();
 
-            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);
+            ConfigFileUpdater updater = new ConfigFileUpdater(xmlFile);
 
             XDocument updateDocument = updater.UpdateXmlFile(Constants.XpathToTestSearchProviderSectionExists,
                 Constants.ExamineSearchProviderFragmentXml, Constants.XpathToInsertSearchProviderSectionAfter);

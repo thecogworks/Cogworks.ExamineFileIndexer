@@ -4,11 +4,11 @@ using System.Xml.XPath;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
 {
-    public class ConfigFileUpdateMigration
+    public class ConfigFileUpdater
     {
         private XDocument _xmlFile;
 
-        public ConfigFileUpdateMigration(XDocument xmlFile)
+        public ConfigFileUpdater(XDocument xmlFile)
         {
             _xmlFile = xmlFile;
 
