@@ -6,17 +6,14 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/thecogworks/meganav/blob/master/LICENSE.md</licenseUrl>
-    <projectUrl>https://github.com/thecogworks/meganav</projectUrl>
+    <licenseUrl>https://bitbucket.org/thecogworks/cogworks.examinefileindexer/LICENSE.md</licenseUrl>
+    <projectUrl>https://bitbucket.org/thecogworks/cogworks.examinefileindexer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
-    <tags>Umbraco Navigation</tags>
+    <tags>Umbraco</tags>
     <dependencies>
       <dependency id="UmbracoCms.Core" version="7.5.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="Web\UI\**\*.*" target="content" />
-  </files>
 </package>

@@ -38,6 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="build\nuget-transforms\ExamineIndex.config.install.xdt" />
+    <None Include="build\nuget-transforms\ExamineIndex.config.uninstall.xdt" />
+    <None Include="build\nuget-transforms\ExamineSettings.config.install.xdt" />
+    <None Include="build\nuget-transforms\ExamineSettings.config.uninstall.xdt" />
     <None Include="Cogworks.ExamineFileIndexer.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.json" />

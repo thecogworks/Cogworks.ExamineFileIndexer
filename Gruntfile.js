@@ -37,12 +37,6 @@ module.exports = function(grunt) {
                             pkg.name + '.xml'
                         ],
                         dest: releaseFilesDir + 'bin/'
-                    },
-                    {
-                        expand: true,
-                        cwd: projectDir + 'Web/UI/',
-                        src: ['**'],
-                        dest: releaseFilesDir
                     }
                 ]
             }

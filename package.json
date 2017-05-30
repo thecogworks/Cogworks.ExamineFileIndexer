@@ -1,16 +1,16 @@
 {
-  "name": "Cogworks.Meganav",
+  "name": "Cogworks.ExamineFileIndexer",
   "version": "1.0.1",
-  "url": "https://github.com/thecogworks/meganav",
+  "url": "https://bitbucket.org/thecogworks/cogworks.examinefileindexer",
   "license": {
     "name": "MIT",
-    "url": "https://github.com/thecogworks/meganav/blob/master/LICENSE.md"
+    "url": "https://bitbucket.org/thecogworks/cogworks.examinefileindexer/LICENSE.md"
   },
   "author": {
     "name": "Cogworks",
     "url": "http://www.thecogworks.com/"
   },
-  "readme": "A flexible, draggable link picker for constructing site navigation menus, big or small, in Umbraco 7.",
+  "readme": "An examine indexer that uses Apache TIKA",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-copy": "~0.4.1",
