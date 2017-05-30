@@ -37,16 +37,16 @@
     <Compile Include="UmbracoMediaFileIndexer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="build\nuget-transforms\ExamineIndex.config.install.xdt">
+    <Content Include="config\ExamineIndex.config.install.xdt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="build\nuget-transforms\ExamineIndex.config.uninstall.xdt">
+    <Content Include="config\ExamineIndex.config.uninstall.xdt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="build\nuget-transforms\ExamineSettings.config.install.xdt">
+    <Content Include="config\ExamineSettings.config.install.xdt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="build\nuget-transforms\ExamineSettings.config.uninstall.xdt">
+    <Content Include="config\ExamineSettings.config.uninstall.xdt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
