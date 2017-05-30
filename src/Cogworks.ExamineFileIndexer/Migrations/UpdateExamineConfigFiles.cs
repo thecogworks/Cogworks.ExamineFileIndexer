@@ -2,7 +2,6 @@
 using System.IO;
 using System.Web;
 using System.Xml.Linq;
-using Umbraco.Core.IO;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Persistence.Migrations;
 using Umbraco.Core.Persistence.SqlSyntax;
@@ -12,8 +11,8 @@ namespace Cogworks.ExamineFileIndexer.Migrations
     [Migration("1.0.0", 1, "Cogworks.ExamineFileIndexer")]
     public class UpdateExamineConfigFiles : MigrationBase
     {
-        //you will get path like C:\code\ExamineFileIndexer\src\Web\config~\config
-        private string _confDir = HttpContext.Current.Server.MapPath("/config");
+       
+        private readonly string _confDir = HttpContext.Current.Server.MapPath("/config");
 
         public UpdateExamineConfigFiles(ISqlSyntaxProvider sqlSyntax, ILogger logger) : base(sqlSyntax, logger)
         {
@@ -98,7 +97,23 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         public override void Down()
         {
-            //todo add removal code
+          
+            RemoveConfigItem("ExamineIndex.config", Constants.XpathToTestIndexSectionExists);
+
+            RemoveConfigItem("ExamineSettings.config", Constants.XpathToTestIndexProviderSectionExists);
+
+            RemoveConfigItem("ExamineSettings.config", Constants.XpathToTestSearchProviderSectionExists);
+        }
+
+        private void RemoveConfigItem(string file,string xPath)
+        {
+            var pathToExamineIndexConfig = Path.Combine(_confDir, file);
+
+            var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
+
+            var configFile = configUpdater.Remove(xPath);
+
+            configFile.Save(pathToExamineIndexConfig);
         }
     }
 }
