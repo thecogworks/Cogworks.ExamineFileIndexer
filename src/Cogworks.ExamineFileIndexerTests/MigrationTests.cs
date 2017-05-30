@@ -35,6 +35,29 @@ namespace Cogworks.ExamineFileIndexerTests
         }
 
         [Test]
+        public void Given_Examine_IndexFile_With_Media_Index_Expect_Another_Media_Index_To_Not_Add()
+        {
+            string pathToConfig = Path.Combine(TestContext.CurrentContext.TestDirectory, @"config\ExamineIndexWithMediaIndex.config");
+
+            XDocument xmlFile = XDocument.Load(pathToConfig);
+
+            string xpathToTestSectionExists = Constants.XpathToTestIndexSectionExists;
+
+            int initialNodeCode = xmlFile.XPathSelectElements(xpathToTestSectionExists).Count(); //expect it to be 1
+
+            ConfigFileUpdateMigration updater = new ConfigFileUpdateMigration(xmlFile);
+
+            string xmlElementToInsert = Constants.ExamineIndexFragmentXml;
+
+            XDocument updateDocument = updater.UpdateXmlFile(xpathToTestSectionExists, xmlElementToInsert, Constants.XpathToInsertIndexSectionAfter);
+
+            int nodeCountAfterUpdate = updateDocument.XPathSelectElements(xpathToTestSectionExists).Count();
+
+            Assert.AreEqual(initialNodeCode, nodeCountAfterUpdate);
+
+        }
+
+        [Test]
         public void Given_Examine_SettingsFile_Add_MediaIndexer_To_Config()
         {
             string pathToConfig = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.ExamineSettingsConfigFile);

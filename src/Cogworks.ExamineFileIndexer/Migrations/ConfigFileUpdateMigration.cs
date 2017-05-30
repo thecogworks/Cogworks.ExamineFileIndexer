@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Linq;
+using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
@@ -15,11 +16,17 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
         public XDocument UpdateXmlFile(string xpathToTestSectionExists, string xmlElementToInsert, string insertAfter)
         {
-            var elementToAdd = XElement.Parse(xmlElementToInsert);
+            var existingNode = _xmlFile.XPathSelectElements(xpathToTestSectionExists);
 
-            var item = _xmlFile.XPathSelectElement(insertAfter);
+            if (!existingNode.Any())
+            {
+                var elementToAdd = XElement.Parse(xmlElementToInsert);
 
-            item.Parent.Add(elementToAdd);
+                var item = _xmlFile.XPathSelectElement(insertAfter);
+
+                item.Parent.Add(elementToAdd);
+
+            }
 
             return _xmlFile;
         }
