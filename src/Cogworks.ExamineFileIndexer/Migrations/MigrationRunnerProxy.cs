@@ -56,7 +56,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             }
             catch (Exception e)
             {
-                LogHelper.Error<MigrationEvents>("Error running Statistics migration", e);
+                LogHelper.Error<MigrationEvents>("Error running "+ migrationName + " migration", e);
             }
         }
     }
