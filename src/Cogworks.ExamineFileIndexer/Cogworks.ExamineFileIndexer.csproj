@@ -33,7 +33,10 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Helper\DictionaryHelper.cs" />
     <Compile Include="MediaParser.cs" />
-    <Compile Include="Migrations\ConfigFileUpdate.cs" />
+    <Compile Include="Migrations\ConfigFileUpdater.cs" />
+    <Compile Include="Migrations\MigrationEvents.cs" />
+    <Compile Include="Migrations\MigrationRunnerProxy.cs" />
+    <Compile Include="Migrations\UpdateExamineConfigFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoMediaFileIndexer.cs" />
   </ItemGroup>
