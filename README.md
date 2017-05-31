@@ -14,6 +14,10 @@ After installation your ExamineIndex.config and ExamineSettings.config file will
 
 ### ExamineIndex.config ###
 
+
+```
+#!xml
+
   <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet">
     <IndexAttributeFields>
       <add Name="id" />
@@ -28,14 +32,29 @@ After installation your ExamineIndex.config and ExamineSettings.config file will
       <add Name="File" />
     </IncludeNodeTypes>
   </IndexSet>
+
+```
   
 ### ExamineSettings.config ###
 Under ExamineIndexProviders/providers
- <add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" extensions=".pdf,.docx" umbracoFileProperty="umbracoFile" />
+ 
+
+```
+#!xml
+
+<add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" extensions=".pdf,.docx" umbracoFileProperty="umbracoFile" />
+
+```
 
 Under ExamineSearchProviders/providers
 
+
+```
+#!xml
+
 <add name="MediaSearcher" type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine" indexSet="MediaIndexSet" analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
+```
+
  
 ### License ###
 
