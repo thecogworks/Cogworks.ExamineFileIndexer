@@ -81,6 +81,7 @@ Update the **extensions** attribute and add any other file types separated by ,
 
 You can also add the image file types eg .jpg. **PLEASE NOTE INDEXING IMAGES WILL ONLY ADD EXIF META DATA.**
  
+You can also install Cogworks.ExamineFileIndexer using Umbraco package.
 ### License ###
 
 Copyright &copy; 2017 [The Cogworks Ltd](http://www.thecogworks.com/), and other contributors
