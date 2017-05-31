@@ -12,7 +12,7 @@ install-package Cogworks.ExamineFileIndexer
 
 After installation your ExamineIndex.config and ExamineSettings.config file will updated.  The following entries will be added
 
-###ExamineIndex.config
+### ExamineIndex.config ###
 
   <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet">
     <IndexAttributeFields>
@@ -29,7 +29,7 @@ After installation your ExamineIndex.config and ExamineSettings.config file will
     </IncludeNodeTypes>
   </IndexSet>
   
-###ExamineSettings.config
+### ExamineSettings.config ###
 Under ExamineIndexProviders/providers
  <add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" extensions=".pdf,.docx" umbracoFileProperty="umbracoFile" />
 
@@ -37,7 +37,7 @@ Under ExamineSearchProviders/providers
 
 <add name="MediaSearcher" type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine" indexSet="MediaIndexSet" analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
  
-## License
+### License ###
 
 Copyright &copy; 2017 [The Cogworks Ltd](http://www.thecogworks.com/), and other contributors
 
