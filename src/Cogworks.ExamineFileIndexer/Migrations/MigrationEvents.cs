@@ -28,9 +28,6 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         {
             if (sender.Data.Name == Constants.PackageName)
             {
-                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(),"Removing migration for " + Constants.PackageName);
-                RemoveEntryFromMigrationTable();
-
                 RemoveConfigItem(Constants.ExamineIndexConfig, Constants.XpathToTestIndexSectionExists);
 
                 RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestIndexProviderSectionExists);
@@ -39,13 +36,16 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
                 ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing config entries for " + Constants.PackageName);
 
+                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing migration for " + Constants.PackageName);
+
+                RemoveEntryFromMigrationTable();
             }
         }
 
         private void RemoveEntryFromMigrationTable()
         {
             var db = ApplicationContext.Current.DatabaseContext.Database;
-            db.Execute("delete from umbracoMigration where name={0}", Constants.PackageName);
+            db.Execute("delete from umbracoMigration where name='{0}'", Constants.PackageName);
         }
 
         private void RemoveConfigItem(string file, string xPath)
