@@ -8,7 +8,13 @@ Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html)
 
 The preferred method for installation is via nuget 
 
+
+```
+#!python
+
 install-package Cogworks.ExamineFileIndexer
+```
+
 
 After installation your ExamineIndex.config and ExamineSettings.config file will updated.  The following entries will be added
 
