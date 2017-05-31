@@ -45,7 +45,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         private void RemoveEntryFromMigrationTable()
         {
             var db = ApplicationContext.Current.DatabaseContext.Database;
-            db.Execute("delete from umbracoMigration where name='{0}'", Constants.PackageName);
+            db.Execute("delete from umbracoMigration where name='{0}'", Constants.PackageName);      
         }
 
         private void RemoveConfigItem(string file, string xPath)
