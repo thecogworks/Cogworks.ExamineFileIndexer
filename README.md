@@ -42,7 +42,9 @@ Under ExamineIndexProviders/providers
 ```
 #!xml
 
-<add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" extensions=".pdf,.docx" umbracoFileProperty="umbracoFile" />
+<add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" 
+extensions=".pdf,.docx" 
+umbracoFileProperty="umbracoFile" />
 
 ```
 
@@ -52,7 +54,8 @@ Under ExamineSearchProviders/providers
 ```
 #!xml
 
-<add name="MediaSearcher" type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine" indexSet="MediaIndexSet" analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
+<add name="MediaSearcher" type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine" indexSet="MediaIndexSet" 
+analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
 ```
 
  
