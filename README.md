@@ -66,13 +66,16 @@ analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
 
 By default the following file types will be indexed pdf,docx.  To add other file types to index you need to update ExamineSettings.config under
 
+
+```
 #!xml
+
 
 <add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" 
 extensions=".pdf,.docx" 
 umbracoFileProperty="umbracoFile" />
-
 ```
+
 
 Update the **extensions** attribute and add any other file types separated by ,
  
