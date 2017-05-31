@@ -6,7 +6,7 @@
 
         public const string PackageFilesPath = "~/App_Plugins/" + PackageName + "/";
 
-        public const string ExamineIndexFragmentXml= "<IndexSet SetName=\"MediaIndexSet\" IndexPath=\"~/App_Data/MediaIndexSet\"><IndexAttributeFields><add Name=\"id\" /><add Name=\"nodeName\" /><add Name=\"updateDate\" /><add Name=\"writerName\"/><add Name=\"path\" /><add Name=\"nodeTypeAlias\" /><add Name=\"parentID\" /></IndexAttributeFields><IncludeNodeTypes><add Name=\"File\" /></IncludeNodeTypes></IndexSet>";
+        public const string ExamineIndexFragmentXml= "<IndexSet SetName=\"MediaIndexSet\" IndexPath=\"~/App_Data/TEMP/ExamineIndexes/MediaIndexSet\"><IndexAttributeFields><add Name=\"id\" /><add Name=\"nodeName\" /><add Name=\"updateDate\" /><add Name=\"writerName\"/><add Name=\"path\" /><add Name=\"nodeTypeAlias\" /><add Name=\"parentID\" /></IndexAttributeFields><IncludeNodeTypes><add Name=\"File\" /></IncludeNodeTypes></IndexSet>";
 
         public const string XpathToTestIndexSectionExists = "/ExamineLuceneIndexSets/IndexSet[@SetName='MediaIndexSet']";
         
