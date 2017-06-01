@@ -65,7 +65,7 @@ analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
 
 ```
 
-By default the following file types will be indexed: *pdf, docx*. To add other file types to index you need to update *ExamineSettings.config*:
+By default the following file types will be indexed: **pdf**, **docx**. To add other file types to index you need to update *ExamineSettings.config*:
 
 
 ```xml
@@ -79,7 +79,7 @@ umbracoFileProperty="umbracoFile" />
 
 Update the **extensions** attribute and add any other file types. They need to be separated by colons (,).
 
-You can also add the image file types eg *.jpg*. **PLEASE NOTE INDEXING IMAGES WILL ONLY ADD EXIF META DATA.**
+You can also add the image file types eg. **.jpg**. **PLEASE NOTE INDEXING IMAGES WILL ONLY ADD EXIF META DATA.**
 
 ### Contribution guidelines
 
