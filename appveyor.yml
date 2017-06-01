@@ -1,4 +1,4 @@
-version: 1.0.1.{build}
+version: 1.0.0.{build}
 pull_requests:
   do_not_increment_build_number: true
 branches:
@@ -6,7 +6,7 @@ branches:
   - master
 skip_non_tags: true
 before_build:
-- cmd: nuget restore src\Cogworks.Meganav.sln
+- cmd: nuget restore src\Cogworks.ExamineFileIndexer.sln
 build:
-  project: src/Cogworks.Meganav.sln
+  project: src/Cogworks.ExamineFileIndexer.sln
   verbosity: minimal
