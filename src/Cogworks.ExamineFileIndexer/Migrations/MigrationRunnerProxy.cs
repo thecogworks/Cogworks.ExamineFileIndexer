@@ -24,7 +24,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             _databaseContext = umbracoContext;
         }
 
-        public void HandleMigration(string migrationName, Version targetVersion)
+        public void HandleMigration(string migrationName, Version targetVersion,bool isUpgrade=true)
         {
             var currentVersion = new SemVersion(0, 0, 0);
             var targetSemVersion = new SemVersion(targetVersion);
@@ -52,12 +52,17 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
             try
             {
-                migrationsRunner.Execute(_databaseContext.Database);
+                migrationsRunner.Execute(_databaseContext.Database,isUpgrade);
             }
             catch (Exception e)
             {
                 LogHelper.Error<MigrationEvents>("Error running "+ migrationName + " migration", e);
             }
+        }
+
+        public void UnDoMigration(string migrationName, Version targetVersion)
+        {
+            HandleMigration(migrationName,targetVersion,false);
         }
     }
 

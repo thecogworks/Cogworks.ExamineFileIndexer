@@ -2,6 +2,8 @@
 using System.IO;
 using System.Web;
 using System.Xml.Linq;
+using umbraco.cms.businesslogic.packager;
+using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Persistence.Migrations;
 using Umbraco.Core.Persistence.SqlSyntax;
@@ -97,7 +99,27 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         }
 
         public override void Down()
-        {          
+        {
+            RemoveConfigItem(Constants.ExamineIndexConfig, Constants.XpathToTestIndexSectionExists);
+
+            RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestIndexProviderSectionExists);
+
+            RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestSearchProviderSectionExists);
         }
+
+
+        
+        private void RemoveConfigItem(string file, string xPath)
+        {
+            var pathToExamineIndexConfig = Path.Combine(UpdateExamineConfigFiles.ConfDir, file);
+
+            var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
+
+            var configFile = configUpdater.Remove(xPath);
+
+            configFile.Save(pathToExamineIndexConfig);
+        }
+
+      
     }
 }

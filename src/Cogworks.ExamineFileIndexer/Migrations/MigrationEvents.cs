@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Xml.Linq;
 using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
+using Umbraco.Core.Logging;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
 {
@@ -28,45 +27,24 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         {
             if (sender.Data.Name == Constants.PackageName)
             {
-                RemoveConfigItem(Constants.ExamineIndexConfig, Constants.XpathToTestIndexSectionExists);
+                
+                try
+                {
+                    var migrationRunner = new MigrationRunnerProxy(
+                                                                    ApplicationContext.Current.ProfilingLogger.Logger,
+                                                                    ApplicationContext.Current.Services.MigrationEntryService,
+                                                                    ApplicationContext.Current.DatabaseContext);
 
-                RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestIndexProviderSectionExists);
+                    migrationRunner.HandleMigration(
+                        Constants.PackageName,
+                        new Version("1.0.0"),false); //fire the down code
 
-                RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestSearchProviderSectionExists);
-
-                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing config entries for " + Constants.PackageName);
-
-                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing migration for " + Constants.PackageName);
-
-                RemoveEntryFromMigrationTable();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Error<MigrationEvents>("Error running DemoPackage migration", ex);
+                }
             }
         }
-
-        private void RemoveEntryFromMigrationTable()
-        {
-            var db = ApplicationContext.Current.DatabaseContext.Database;
-            db.Execute("delete from [umbracoMigration] where [name]='{0}'", Constants.PackageName);      
-        }
-
-        private void RemoveConfigItem(string file, string xPath)
-        {
-            var pathToExamineIndexConfig = Path.Combine(UpdateExamineConfigFiles.ConfDir, file);
-
-            var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
-
-            var configFile = configUpdater.Remove(xPath);
-
-            configFile.Save(pathToExamineIndexConfig);
-        }
-
-        private ConfigFileUpdater GetConfigXmlToUpdate(string fileToUpdate)
-        {
-
-            var indexConfig = XDocument.Load(fileToUpdate);
-
-            var configUpdater = new ConfigFileUpdater(indexConfig);
-
-            return configUpdater;
-        }
-    }
+     }
 }
