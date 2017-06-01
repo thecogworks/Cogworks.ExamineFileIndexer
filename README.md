@@ -4,8 +4,8 @@
 [![NuGet release](https://img.shields.io/nuget/v/Cogworks.ExamineFileIndexer.svg)](https://www.nuget.org/packages/Cogworks.ExamineFileIndexer)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.org/projects/developer-tools/examinefileindexer/)
 
-Custom Examine indexer to index any umbraco MEDIA node. 
-Under the hood it makes use of [apache tika](http://tika.apache.org/) to extract content and meta data from umbraco media files. 
+Custom Examine indexer to index any umbraco media nodes. 
+Under the hood it makes use of [Apache Tika](http://tika.apache.org/) to extract content and meta data from umbraco media files. 
 Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html).
 
 ## Getting started
