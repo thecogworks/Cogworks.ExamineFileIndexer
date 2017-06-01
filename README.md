@@ -1,28 +1,32 @@
-# Cogworks.ExamineFileIndexer
+# ExamineFileIndexer
 
-Cogworks.ExamineFileIndexer is a custom indexer to index any umbraco MEDIA node. 
+Custom Examine indexer to index any umbraco MEDIA node. 
 Under the hood it makes use of [apache tika](http://tika.apache.org/) to extract content and meta data from umbraco media files. 
-Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html)
+Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html).
 
-##Installation
+## Getting started
 
-The preferred method for installation is via nuget 
+This package is supported on Umbraco 7.6.1+.
 
+### Installation
 
-```
-#!python
+ExamineFileIndexer is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
 
-install-package Cogworks.ExamineFileIndexer
-```
+#### Our Umbraco repository
+You can find a downloadable package, along with a discussion forum for this package, on the [Our Umbraco](https://our.umbraco.org/projects/developer-tools/examinefileindexer/) site.
 
+#### NuGet package repository
+To [install from NuGet](https://www.nuget.org/packages/Cogworks.ExamineFileIndexer/), run the following command in your instance of Visual Studio.
 
-After installation your ExamineIndex.config and ExamineSettings.config file will updated.  The following entries will be added
+    PM> Install-Package Cogworks.ExamineFileIndexer
 
-### ExamineIndex.config ###
+## Usage
 
+After installation your *ExamineIndex.config* and *ExamineSettings.config* file will updated. The following entries will be added.
 
-```
-#!xml
+#### ExamineIndex.config ###
+
+```xml
 
   <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet">
     <IndexAttributeFields>
@@ -41,12 +45,10 @@ After installation your ExamineIndex.config and ExamineSettings.config file will
 
 ```
   
-### ExamineSettings.config ###
-Under ExamineIndexProviders/providers
- 
+#### ExamineSettings.config ###
+Under *ExamineIndexProviders/providers*:
 
-```
-#!xml
+```xml
 
 <add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" 
 extensions=".pdf,.docx" 
@@ -54,35 +56,40 @@ umbracoFileProperty="umbracoFile" />
 
 ```
 
-Under ExamineSearchProviders/providers
+Under *ExamineSearchProviders/providers*:
 
-
-```
-#!xml
+```xml
 
 <add name="MediaSearcher" type="UmbracoExamine.UmbracoExamineSearcher, UmbracoExamine" indexSet="MediaIndexSet" 
 analyzer="Lucene.Net.Analysis.Standard.StandardAnalyzer, Lucene.Net" />
-```
-
-By default the following file types will be indexed pdf,docx.  To add other file types to index you need to update ExamineSettings.config under
-
 
 ```
-#!xml
 
+By default the following file types will be indexed: *pdf, docx*. To add other file types to index you need to update *ExamineSettings.config*:
+
+
+```xml
 
 <add name="MediaIndexer" type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" 
 extensions=".pdf,.docx" 
 umbracoFileProperty="umbracoFile" />
+
 ```
 
 
-Update the **extensions** attribute and add any other file types separated by ,
+Update the **extensions** attribute and add any other file types. They need to be separated by colons (,).
 
-You can also add the image file types eg .jpg. **PLEASE NOTE INDEXING IMAGES WILL ONLY ADD EXIF META DATA.**
- 
-You can also install Cogworks.ExamineFileIndexer using Umbraco package.
-### License ###
+You can also add the image file types eg *.jpg*. **PLEASE NOTE INDEXING IMAGES WILL ONLY ADD EXIF META DATA.**
+
+### Contribution guidelines
+
+To raise a new bug, create an issue on the GitHub repository. To fix a bug or add new features, fork the repository and send a pull request with your changes. Feel free to add ideas to the repository's issues list if you would to discuss anything related to the package.
+
+### Who do I talk to?
+
+This project is maintained by [Cogworks](http://www.thecogworks.com/) and contributors. If you have any questions about the project please contact us through the forum on Our Umbraco, on [Twitter](https://twitter.com/cogworks), or by raising an issue on GitHub.
+
+## License
 
 Copyright &copy; 2017 [The Cogworks Ltd](http://www.thecogworks.com/), and other contributors
 
