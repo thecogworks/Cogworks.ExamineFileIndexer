@@ -28,11 +28,9 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         {
             var currentVersion = new SemVersion(0, 0, 0);
             var targetSemVersion = new SemVersion(targetVersion);
-
-            // get all migrations for "Statistics" already executed
+            
             var migrations = _migrationEntryService.GetAll(migrationName);
 
-            // get the latest migration for "Statistics" executed
             var latestMigration = migrations
                 .OrderByDescending(x => x.Version)
                 .FirstOrDefault();
@@ -49,7 +47,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
                 currentVersion,
                 targetSemVersion,
                 migrationName);
-
+            
             try
             {
                 migrationsRunner.Execute(_databaseContext.Database);
@@ -59,6 +57,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
                 LogHelper.Error<MigrationEvents>("Error running "+ migrationName + " migration", e);
             }
         }
+
     }
 
     

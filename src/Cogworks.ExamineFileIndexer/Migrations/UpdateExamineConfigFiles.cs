@@ -8,7 +8,7 @@ using Umbraco.Core.Persistence.SqlSyntax;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
 {
-    [Migration("1.0.0", 1, Constants.PackageName)]
+    [Migration(Constants.Version, 1, Constants.PackageName)]
     public class UpdateExamineConfigFiles : MigrationBase
     {
        
@@ -97,7 +97,27 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         }
 
         public override void Down()
-        {          
+        {
+            RemoveConfigItem(Constants.ExamineIndexConfig, Constants.XpathToTestIndexSectionExists);
+
+            RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestIndexProviderSectionExists);
+
+            RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestSearchProviderSectionExists);
         }
+
+
+        
+        private void RemoveConfigItem(string file, string xPath)
+        {
+            var pathToExamineIndexConfig = Path.Combine(UpdateExamineConfigFiles.ConfDir, file);
+
+            var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
+
+            var configFile = configUpdater.Remove(xPath);
+
+            configFile.Save(pathToExamineIndexConfig);
+        }
+
+      
     }
 }

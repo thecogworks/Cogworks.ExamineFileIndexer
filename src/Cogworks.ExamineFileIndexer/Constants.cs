@@ -2,6 +2,10 @@
 {
     public class Constants
     {
+        public const int VersionNo = 1;
+
+        public const string Version = "1.0.0";
+
         public const string PackageName = "Cogworks.ExamineFileIndexer";
 
         public const string ExamineIndexConfig = "ExamineIndex.config";

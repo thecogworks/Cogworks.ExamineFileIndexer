@@ -1,8 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Xml.Linq;
+using Semver;
 using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
+using Umbraco.Core.Logging;
+using Umbraco.Core.Persistence;
+using Umbraco.Core.Persistence.Migrations;
+using Umbraco.Web;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
 {
@@ -19,7 +22,7 @@ namespace Cogworks.ExamineFileIndexer.Migrations
 
             migrationRunner.HandleMigration(
                 Constants.PackageName,
-                new Version("1.0.0"));
+                new Version(Constants.Version));
             
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
         }
@@ -28,45 +31,42 @@ namespace Cogworks.ExamineFileIndexer.Migrations
         {
             if (sender.Data.Name == Constants.PackageName)
             {
-                RemoveConfigItem(Constants.ExamineIndexConfig, Constants.XpathToTestIndexSectionExists);
+                try
+                {
+                    
+                    var mes = ApplicationContext.Current.Services.MigrationEntryService;
+                    var logger = ApplicationContext.Current.ProfilingLogger.Logger;
 
-                RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestIndexProviderSectionExists);
+                    var migrationsRunner = new MigrationRunner(
+                        mes,
+                        logger,
+                        new SemVersion(0),
+                        new SemVersion(Constants.VersionNo), 
+                        Constants.PackageName);
 
-                RemoveConfigItem(Constants.ExamineSettingsConfig, Constants.XpathToTestSearchProviderSectionExists);
+                        var db = UmbracoContext.Current.Application.DatabaseContext.Database;
 
-                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing config entries for " + Constants.PackageName);
+                        //calls the down method on migration UpdateExamineConfigFiles however the db entry for migration is not removed
+                        //need to do that manually
+                        migrationsRunner.Execute(db, false); 
 
-                ApplicationContext.Current.ProfilingLogger.Logger.Debug(GetType(), "Removing migration for " + Constants.PackageName);
-
-                RemoveEntryFromMigrationTable();
+                        RemoveMigrationFromDb(db);
+                   
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Error<MigrationEvents>("Error running DemoPackage migration", ex);
+                }
             }
         }
 
-        private void RemoveEntryFromMigrationTable()
+        private void RemoveMigrationFromDb(UmbracoDatabase db)
         {
-            var db = ApplicationContext.Current.DatabaseContext.Database;
-            db.Execute("delete from [umbracoMigration] where [name]='{0}'", Constants.PackageName);      
-        }
-
-        private void RemoveConfigItem(string file, string xPath)
-        {
-            var pathToExamineIndexConfig = Path.Combine(UpdateExamineConfigFiles.ConfDir, file);
-
-            var configUpdater = GetConfigXmlToUpdate(pathToExamineIndexConfig);
-
-            var configFile = configUpdater.Remove(xPath);
-
-            configFile.Save(pathToExamineIndexConfig);
-        }
-
-        private ConfigFileUpdater GetConfigXmlToUpdate(string fileToUpdate)
-        {
-
-            var indexConfig = XDocument.Load(fileToUpdate);
-
-            var configUpdater = new ConfigFileUpdater(indexConfig);
-
-            return configUpdater;
+            using (Transaction transaction = db.GetTransaction())
+            {
+                db.Execute("delete from umbracoMigration where version='{0}'", Constants.Version);
+                transaction.Complete();
+            }
         }
     }
 }
