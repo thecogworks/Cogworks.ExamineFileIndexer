@@ -6,7 +6,7 @@
 
 Custom Examine indexer to index any umbraco media nodes. 
 Under the hood it makes use of [Apache Tika](http://tika.apache.org/) to extract content and meta data from umbraco media files. 
-Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html).
+Tika can handle the [following formats](http://tika.apache.org/1.2/formats.html).  The package also supports VPP (Virtual path provider) so if you media files are in azure etc it will also index those.
 
 ## Getting started
 
