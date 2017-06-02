@@ -24,15 +24,13 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             _databaseContext = umbracoContext;
         }
 
-        public void HandleMigration(string migrationName, Version targetVersion,bool isUpgrade=true)
+        public void HandleMigration(string migrationName, Version targetVersion)
         {
             var currentVersion = new SemVersion(0, 0, 0);
             var targetSemVersion = new SemVersion(targetVersion);
-
-            // get all migrations for "Statistics" already executed
+            
             var migrations = _migrationEntryService.GetAll(migrationName);
 
-            // get the latest migration for "Statistics" executed
             var latestMigration = migrations
                 .OrderByDescending(x => x.Version)
                 .FirstOrDefault();
@@ -49,10 +47,10 @@ namespace Cogworks.ExamineFileIndexer.Migrations
                 currentVersion,
                 targetSemVersion,
                 migrationName);
-
+            
             try
             {
-                migrationsRunner.Execute(_databaseContext.Database,isUpgrade);
+                migrationsRunner.Execute(_databaseContext.Database);
             }
             catch (Exception e)
             {
@@ -60,10 +58,6 @@ namespace Cogworks.ExamineFileIndexer.Migrations
             }
         }
 
-        public void UnDoMigration(string migrationName, Version targetVersion)
-        {
-            HandleMigration(migrationName,targetVersion,false);
-        }
     }
 
     

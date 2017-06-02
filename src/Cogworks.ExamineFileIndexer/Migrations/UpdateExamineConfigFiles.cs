@@ -2,15 +2,13 @@
 using System.IO;
 using System.Web;
 using System.Xml.Linq;
-using umbraco.cms.businesslogic.packager;
-using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Persistence.Migrations;
 using Umbraco.Core.Persistence.SqlSyntax;
 
 namespace Cogworks.ExamineFileIndexer.Migrations
 {
-    [Migration("1.0.0", 1, Constants.PackageName)]
+    [Migration(Constants.Version, 1, Constants.PackageName)]
     public class UpdateExamineConfigFiles : MigrationBase
     {
        
