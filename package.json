@@ -1,10 +1,10 @@
 {
   "name": "Cogworks.ExamineFileIndexer",
   "version": "1.0.0",
-  "url": "https://bitbucket.org/thecogworks/cogworks.examinefileindexer",
+  "url": "https://github.com/thecogworks/examinefileindexer",
   "license": {
     "name": "MIT",
-    "url": "https://bitbucket.org/thecogworks/cogworks.examinefileindexer/LICENSE.md"
+    "url": "https://github.com/thecogworks/examinefileindexer/blob/master/LICENSE.md"
   },
   "author": {
     "name": "Cogworks",
