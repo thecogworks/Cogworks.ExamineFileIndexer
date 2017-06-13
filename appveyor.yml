@@ -3,11 +3,9 @@ pull_requests:
   do_not_increment_build_number: true
 deploy:
   provider: NuGet
-  server:                  # remove to push to NuGet.org
   api_key:
     secure: YTgjd2281nKqgxIEe2xIPDwKEMLRkXSc/rJdaJEcjP+WN9jEm91+bPbSeGh+qbfz
   skip_symbols: false
-  symbol_server:           # remove to push symbols to SymbolSource.org
   artifact: /.*\.nupkg/
 branches:
   only:
