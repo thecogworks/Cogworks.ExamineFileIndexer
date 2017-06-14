@@ -78,6 +78,7 @@ namespace Cogworks.ExamineFileIndexerTests
         /// <param name="noOfDocs">no of docs to mimic</param>
         [Test]
         [TestCase(1000)]
+        [Ignore("long running test")]
         public void Given_Large_No_Of_Docs_Expect_No_Out_Of_Memory_Exceptions_Thrown(int noOfDocs)
         {
             string pdfFileToTest = Path.Combine(TestContext.CurrentContext.TestDirectory, TestHelper.PdfToTest);

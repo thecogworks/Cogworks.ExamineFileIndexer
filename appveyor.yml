@@ -1,6 +1,12 @@
 version: 1.0.0.{build}
 pull_requests:
   do_not_increment_build_number: true
+deploy:
+  provider: NuGet
+  api_key:
+    secure: YTgjd2281nKqgxIEe2xIPDwKEMLRkXSc/rJdaJEcjP+WN9jEm91+bPbSeGh+qbfz
+  skip_symbols: false
+  artifact: /.*\.nupkg/
 branches:
   only:
   - master
