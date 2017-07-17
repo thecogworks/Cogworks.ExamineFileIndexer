@@ -167,24 +167,34 @@ namespace Cogworks.ExamineFileIndexer
                 }
                 else
                 {
-                    // perhaps it's available via the VirtualPathProvider ?
-                    var stream = VirtualPathProvider.OpenFile((string)filePath);
+                    // perhaps it's available via the VirtualPathProvider ?                 
 
-                    if (stream.CanRead)
+                    if (HostingEnvironment.VirtualPathProvider.FileExists((string)filePath))
                     {
-                        var extractionResult = ExtractContentFromStream(stream);
 
-                        if (!string.IsNullOrWhiteSpace(extractionResult.ExtractedText))
+                        var stream = VirtualPathProvider.OpenFile((string)filePath);
+
+                        if (stream.CanRead)
                         {
-                            fields.Add(TextContentFieldName, extractionResult.ExtractedText);
-                            fields.AddRange(extractionResult.MetaData);
+                            var extractionResult = ExtractContentFromStream(stream);
+
+                            if (!string.IsNullOrWhiteSpace(extractionResult.ExtractedText))
+                            {
+                                fields.Add(TextContentFieldName, extractionResult.ExtractedText);
+                                fields.AddRange(extractionResult.MetaData);
+                            }
+                        }
+                        else
+                        {
+                            DataService.LogService.AddInfoLog((int)node.Attribute("id"), _loggerEntryName + ": Can't read steam at path " + filePath);
+
                         }
                     }
                     else
                     {
                         DataService.LogService.AddInfoLog((int)node.Attribute("id"), _loggerEntryName + ": No file found at path " + filePath);
                     }
-                }
+                    }
             }
 
             return fields;
