@@ -3,8 +3,8 @@
   "description": "Custom Examine indexer to index any umbraco media nodes.",
   "company": "Cogworks",
   "product": "Cogworks.ExamineFileIndexer",
-  "copyright": "Copyright © 2017",
-  "version": "1.0.3",
+  "copyright": "Copyright © 2019",
+  "version": "1.0.4",
   "informationalVersion": null,
-  "fileVersion": "1.0.3"
+  "fileVersion": "1.0.4"
 }

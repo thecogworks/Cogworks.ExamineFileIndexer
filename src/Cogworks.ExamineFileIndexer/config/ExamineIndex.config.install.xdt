@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <ExamineLuceneIndexSets xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
-  
+
   <IndexSet SetName="MediaIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/MediaIndexSet"
             xdt:Locator="Match(SetName)"
             xdt:Transform="InsertIfMissing">
-    
-   <IndexAttributeFields>
+    <IndexAttributeFields>
       <add Name="id" />
       <add Name="nodeName" />
       <add Name="updateDate" />
@@ -17,5 +16,6 @@
     <IncludeNodeTypes>
       <add Name="File" />
     </IncludeNodeTypes>
-</IndexSet>
+  </IndexSet>
+
 </ExamineLuceneIndexSets>

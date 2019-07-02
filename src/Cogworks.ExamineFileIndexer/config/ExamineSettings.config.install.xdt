@@ -4,8 +4,8 @@
   <ExamineIndexProviders>
     <providers>
       <add name="MediaIndexer"
-           type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer"
-              extensions=".pdf,.docx"
+           type="Cogworks.ExamineFileIndexer.UmbracoMediaFileIndexer, Cogworks.ExamineFileIndexer" 
+           extensions=".pdf,.docx"
            umbracoFileProperty="umbracoFile"
            xdt:Locator="Match(name)"
            xdt:Transform="InsertIfMissing"/>
