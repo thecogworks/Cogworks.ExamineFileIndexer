@@ -19,9 +19,6 @@ module.exports = function(grunt) {
     // get the version of the package
     var version = assembly.informationalVersion ? assembly.informationalVersion : assembly.version;
 
-    // set dependencies - libraries which will be copied over to output package
-    var umbracoPackageFileDependancies = [ 'IKVM.*.dll', 'TikaOnDotNet.*.dll' ];
-	
     grunt.initConfig({
         pkg: pkg,
         clean: {
@@ -41,11 +38,11 @@ module.exports = function(grunt) {
                         ],
                         dest: releaseFilesDir + 'bin/'
                     },
-					 {
+                    {
                         expand: true,
-                        cwd: projectDir + 'bin/Release/',
-                        src: umbracoPackageFileDependancies,
-                        dest: releaseFilesDir + 'bin/'
+                        cwd: projectDir + 'Web/UI/',
+                        src: ['**'],
+                        dest: releaseFilesDir
                     }
                 ]
             }
@@ -54,8 +51,7 @@ module.exports = function(grunt) {
             release: {
                 cwd: releaseFilesDir,
                 src: [
-                    releaseFilesDir + '**/*.*',
-					
+                    releaseFilesDir + '**/*.*'
                 ],
                 dest: releaseDir + 'zip/' + pkg.name + '.v' + version + '.zip'
             }
@@ -81,9 +77,9 @@ module.exports = function(grunt) {
             dist: {
                 src: projectDir + pkg.name + '.csproj',
                 dest: releaseDir + 'nuget/',
-				options: {
-					properties: 'Platform=AnyCPU;Configuration=Release'
-				}
+                options: {
+                    properties: 'Platform=AnyCPU;Configuration=Release'
+                }
             }
         }
     });
