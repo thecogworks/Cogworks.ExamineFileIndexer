@@ -6,6 +6,8 @@
     <title>$title$</title>
     <authors>The Cogworks</authors>
     <owners>The Cogworks</owners>
+    <licenseUrl>https://github.com/thecogworks/examinefileindexer/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/thecogworks/examinefileindexer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
